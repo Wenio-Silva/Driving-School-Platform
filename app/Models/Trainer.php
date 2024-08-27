@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Lesson;
+use App\Models\Compensation;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Sanctum\HasApiTokens;
 
 class Trainer extends Model
@@ -36,4 +38,14 @@ class Trainer extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function compensations()
+    {
+        return $this->hasMany(Compensation::class);
+    }
+
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class);
+    }
 }
