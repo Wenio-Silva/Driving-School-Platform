@@ -10,6 +10,12 @@ class Compensation extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'trainer_id',
+        'amount',
+        'created_at'
+    ];
+
     public function trainer()
     {
         return $this->belongTo(Trainer::class);

@@ -11,6 +11,15 @@ class Vehicle extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'make',
+        'model',
+        'year',
+        'license_plate',
+        'status',
+        'mileage'
+    ];
+
     public function lessons()
     {
         return $this->hasMany(Lesson::class);

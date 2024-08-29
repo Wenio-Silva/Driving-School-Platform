@@ -11,7 +11,6 @@ class Payment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'candidate_id',
         'amount',
         'date',
         'payment_method'
