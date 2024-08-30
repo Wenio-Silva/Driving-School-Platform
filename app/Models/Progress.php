@@ -11,6 +11,13 @@ class Progress extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'candidate_id',
+        'course_id',
+        'status',
+        'completition_porcentage'
+    ];
+
     public function candidate()
     {
         return $this->belongTo(Candidate::class);

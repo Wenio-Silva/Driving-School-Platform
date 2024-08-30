@@ -25,7 +25,7 @@ class EnrollmentController extends Controller
         return EnrollmentResource::make($enrollment);
     }
 
-    public function show(Candidate $candidate)
+    public function show(Enrollment $enrollment)
     {
         return EnrollmentResource::make($enrollment);
     }
