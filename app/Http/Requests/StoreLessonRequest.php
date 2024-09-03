@@ -26,6 +26,7 @@ class StoreLessonRequest extends FormRequest
             'vehicle_id' => 'required|integer|exists:vehicles,id',
             'candidate_id' => 'required|integer|exists:candidates,id',
             'course_id' => 'required|integer|exists:courses,id',
+            'date' => 'required|date_format:Y-m-d H:i',
             'status' => 'required|string'
         ];
     }

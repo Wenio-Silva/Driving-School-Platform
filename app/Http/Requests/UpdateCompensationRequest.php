@@ -23,7 +23,7 @@ class UpdateCompensationRequest extends FormRequest
     {
         return [
             'amount' => 'nullable|numeric',
-            'created_at' => 'nullable|date_format:Y-m-d'
+            'date' => 'nullable|date_format:Y-m-d'
         ];
     }
 }

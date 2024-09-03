@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Trainer;
 use App\Models\Compensation;
 use Illuminate\Http\Request;
@@ -18,9 +19,16 @@ class CompensationController extends Controller
 
     public function store(StoreCompensationRequest $request, Trainer $trainer)
     {
-        $compensation = Compensation::create(array_merge([
-            'trainer_id' => $trainer->id
-        ], $request->validated()));
+        $validatedData = $request->validated();
+
+        $date = Carbon::createFromFormat('Y-m-d', $request['date']);
+        $formattedDate = $date->format('d/m/Y');
+
+        $compensation = new Compensation();
+        $compensation->trainer_id = $trainer->id;
+        $compensation->amount = $validatedData['amount'];
+        $compensation->date = $date;
+        $compensation->save();
 
         return CompensationResource::make($compensation);
     }
@@ -30,37 +38,17 @@ class CompensationController extends Controller
         return $trainer->compensations()->get(); //StatisticResource::make($trainer->statistics()->get());
     }
 
-    public function update(UpdateCompensationRequest $request, Trainer $trainer)
+    public function update(UpdateCompensationRequest $request, Compensation $compensation)
     {
-        $compensation = $trainer->compensations()->first();
+        $compensation->update($request->validated());
 
-        if ($compensation) {
-            $compensation->update($request->validated());
-
-            return response()->json([
-                'data' => $compensation
-            ]);
-        } else {
-            return response()->json([
-                'message' => 'Not found'
-            ], 404);
-        }
+        return CompensationResource::make($compensation);
     }
 
-    public function destroy(Trainer $trainer)
+    public function destroy(Compensation $compensation)
     {
-        $payment = $trainer->payments()->first();
+        $compensation->delete();
 
-        if ($payment) {
-            $payment->delete();
-
-            return response()->noContent();
-        } else {
-            return response()->json([
-                'message' => 'Not found'
-            ], 404);
-        }
-
-        
+        return response()->noContent();
     } 
 }

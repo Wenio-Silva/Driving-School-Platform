@@ -20,6 +20,7 @@ class LessonResource extends JsonResource
             'vehicle_id' => $this->vehicle_id,
             'candidate_id' => $this->candidate_id,
             'course_id' => $this->course_id,
+            'date' => $this->date->format('d-m-Y H:i'),
             'status' => $this->status
         ];
     }

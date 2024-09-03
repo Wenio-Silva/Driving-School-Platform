@@ -5,11 +5,22 @@ namespace App\Http\Controllers\Candidate;
 use App\Models\Candidate;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CandidateResource;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreCandidateRequest;
 use App\Http\Requests\UpdateCandidateRequest;
+use App\Http\Requests\StoreStatisticRequest;
+use App\Http\Requests\UpdateStatisticRequest;
+use App\Http\Controllers\StatisticController;
 
 class CandidateController extends Controller
 {
+    protected $statisticController;
+
+    public function __construct(StatisticController $statisticController)
+    {
+        $this->statisticController = $statisticController;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -40,14 +51,6 @@ class CandidateController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Candidate $candidate)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateCandidateRequest $request, Candidate $candidate)
@@ -65,5 +68,26 @@ class CandidateController extends Controller
         $candidate->delete();
 
         return response()->noContent();
+    }
+
+    //Statistics Methods
+    public function showStatistics(Candidate $candidate)
+    {
+        return $this->statisticController->show($candidate);
+    }
+
+    public function storeStatistics(StoreStatisticRequest $request, Candidate $candidate)
+    {
+        return $this->statisticController->store($request, $candidate);
+    }
+
+    public function updateStatistics(UpdateStatisticRequest $request, Candidate $candidate)
+    {
+        return $this->statisticController->update($request, $candidate);
+    }
+
+    public function destroyStatistics(Candidate $candidate)
+    {
+        return $this->statisticController->destroy($candidate);
     }
 }

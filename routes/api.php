@@ -45,11 +45,11 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function () {
     Route::apiResource('/course', CourseController::class);
     Route::apiResource('/vehicle', VehicleController::class);
 
-    Route::get('/statistic', [StatisticController::class, 'index']);
-    Route::get('/statistic/{candidate}', [StatisticController::class, 'show']);
-    Route::post('statistic/{candidate}', [StatisticController::class, 'store']);
-    Route::patch('statistic/{candidate}', [StatisticController::class, 'update']);
-    Route::delete('statistic/{candidate}', [StatisticController::class, 'destroy']);
+    Route::get('/admin/candidate/statistic', [CandidateController::class, 'index']);
+    Route::get('/admin/candidate/statistic/{candidate}', [CandidateController::class, 'showStatistics']);
+    Route::post('/admin/candidate/statistic/{candidate}', [CandidateController::class, 'storeStatistics']);
+    Route::patch('/admin/candidate/statistic/{candidate}', [CandidateController::class, 'updateStatistics']);
+    Route::delete('/admin/candidate/statistic/{candidate}', [CandidateController::class, 'destroyStatistics']);
 
     Route::get('/payment', [PaymentController::class, 'index']);
     Route::get('/payment/{candidate}', [PaymentController::class, 'show']);
@@ -61,8 +61,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function () {
     Route::get('/compensation', [CompensationController::class, 'index']);
     Route::get('/compensation/{trainer}', [CompensationController::class, 'show']);
     Route::post('compensation/{trainer}', [CompensationController::class, 'store']);
-    Route::patch('compensation/{trainer}', [CompensationController::class, 'update']);
-    Route::delete('compensation/{trainer}', [CompensationController::class, 'destroy']);
+    Route::patch('compensation/{compensation}', [CompensationController::class, 'update']);
+    Route::delete('compensation/{compensation}', [CompensationController::class, 'destroy']);
 
     Route::apiResource('/admin/enrollment', EnrollmentController::class);
 
@@ -73,6 +73,7 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function () {
     Route::apiResource('/admin/lesson', LessonController::class);
     
     Route::apiResource('/admin/vehicleusage', VehicleUsageController::class);
+    Route::get('/admin/vehicleusage/statistics/{vehicle}', [VehicleUsageController::class, 'showStatistics']);
   });
 // Only for TRAINERS
 Route::middleware(['auth:sanctum', 'type.trainer'])->group(function () {

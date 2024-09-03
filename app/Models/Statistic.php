@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Candidate;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Statistic extends Model
@@ -19,7 +20,7 @@ class Statistic extends Model
         'average_progress'
     ];
 
-    public function candidate()
+    public function candidate(): BelongsTo
     {
         return $this->belongTo(Candidate::class);
     }

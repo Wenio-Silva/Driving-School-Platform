@@ -22,7 +22,8 @@ class StoreCompensationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'amount' => 'required|numeric'
+            'amount' => 'required|numeric',
+            'date' => 'required|date_format:Y-m-d'
         ];
     }
 }

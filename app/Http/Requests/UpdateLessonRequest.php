@@ -26,6 +26,7 @@ class UpdateLessonRequest extends FormRequest
             'vehicle_id' => 'nullable|integer|exists:vehicles,id',
             'candidate_id' => 'nullable|integer|exists:candidates,id',
             'course_id' => 'nullable|integer|exists:courses,id',
+            'date' => 'nullable|date_format:Y-m-d H:i',
             'status' => 'nullable|string'
         ];
     }

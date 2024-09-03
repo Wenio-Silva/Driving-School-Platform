@@ -13,7 +13,7 @@ class Compensation extends Model
     protected $fillable = [
         'trainer_id',
         'amount',
-        'created_at'
+        'date'
     ];
 
     public function trainer()

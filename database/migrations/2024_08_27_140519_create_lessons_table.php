@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('vehicle_id')->constrained()->cascadeOnDelete();
             $table->foreignId('candidate_id')->constrained()->cascadeOnDelete();
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
+            $table->date('date');
             $table->string('status');
             $table->timestamps();
         });

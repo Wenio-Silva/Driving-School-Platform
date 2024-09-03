@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('trainer_id')->constrained()->cascadeOnDelete();
             $table->decimal('amount', 10, 2);
+            $table->date('date');
             $table->timestamps();
         });
     }

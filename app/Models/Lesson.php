@@ -18,6 +18,7 @@ class Lesson extends Model
         'vehicle_id',
         'candidate_id',
         'course_id',
+        'date',
         'status'
     ];
 

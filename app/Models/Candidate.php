@@ -7,11 +7,12 @@ use App\Models\Payment;
 use App\Models\Progress;
 use App\Models\Statistic;
 use App\Models\Enrollment;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Candidate extends Authenticatable
 {
@@ -49,9 +50,9 @@ class Candidate extends Authenticatable
         return $this->hasMany(Payment::class);
     }
 
-    public function statistics()
+    public function statistics() : HasOne
     {
-        return $this->hasMany(Statistic::class);
+        return $this->hasOne(Statistic::class);
     }
 
     public function enrollments()
