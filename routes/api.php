@@ -41,9 +41,9 @@ Route::post('trainer/login', [TrainerAuthController::class, 'login']);
 Route::middleware(['auth:sanctum', 'type.admin'])->group(function () {
     Route::post('/admin/logout', [AdminAuthController::class, 'logout']);
     Route::apiResource('/admin/candidate', CandidateController::class);
-    Route::apiResource('/trainer', TrainerController::class);  
-    Route::apiResource('/course', CourseController::class);
-    Route::apiResource('/vehicle', VehicleController::class);
+    Route::apiResource('/admin/trainer', TrainerController::class);  
+    Route::apiResource('/admin/course', CourseController::class);
+    Route::apiResource('/admin/vehicle', VehicleController::class);
 
     Route::get('/admin/candidate/statistic', [CandidateController::class, 'index']);
     Route::get('/admin/candidate/statistic/{candidate}', [CandidateController::class, 'showStatistics']);
@@ -51,18 +51,18 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function () {
     Route::patch('/admin/candidate/statistic/{candidate}', [CandidateController::class, 'updateStatistics']);
     Route::delete('/admin/candidate/statistic/{candidate}', [CandidateController::class, 'destroyStatistics']);
 
-    Route::get('/payment', [PaymentController::class, 'index']);
-    Route::get('/payment/{candidate}', [PaymentController::class, 'show']);
-    Route::post('payment/{candidate}', [PaymentController::class, 'store']);
-    Route::patch('payment/{candidate}', [PaymentController::class, 'update']);
-    Route::delete('payment/{candidate}', [PaymentController::class, 'destroy']);
+    Route::get('/admin/payment', [PaymentController::class, 'index']);
+    Route::get('/admin/payment/{candidate}', [PaymentController::class, 'show']);
+    Route::post('/admin/payment/{candidate}', [PaymentController::class, 'store']);
+    Route::patch('/admin/payment/{candidate}', [PaymentController::class, 'update']);
+    Route::delete('/admin/payment/{candidate}', [PaymentController::class, 'destroy']);
 
 
-    Route::get('/compensation', [CompensationController::class, 'index']);
-    Route::get('/compensation/{trainer}', [CompensationController::class, 'show']);
-    Route::post('compensation/{trainer}', [CompensationController::class, 'store']);
-    Route::patch('compensation/{compensation}', [CompensationController::class, 'update']);
-    Route::delete('compensation/{compensation}', [CompensationController::class, 'destroy']);
+    Route::get('/admin/compensation', [CompensationController::class, 'index']);
+    Route::get('/admin/compensation/{trainer}', [CompensationController::class, 'show']);
+    Route::post('/admin/compensation/{trainer}', [CompensationController::class, 'store']);
+    Route::patch('/admin/compensation/{compensation}', [CompensationController::class, 'update']);
+    Route::delete('/admin/compensation/{compensation}', [CompensationController::class, 'destroy']);
 
     Route::apiResource('/admin/enrollment', EnrollmentController::class);
 
@@ -79,13 +79,16 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function () {
 Route::middleware(['auth:sanctum', 'type.trainer'])->group(function () {
     Route::post('/trainer/logout', [CandidateAuthController::class, 'logout']);
     Route::apiResource('/trainer', TrainerController::class);  
+
+    Route::apiResource('/trainer/exam', ExamController::class); //Allowed to schedule exams for the candidates
 });
 // Only for CANDIDATES
 Route::middleware(['auth:sanctum', 'type.candidate'])->group(function () {
     Route::post('/candidate/logout', [TrainerAuthController::class, 'logout']);
-    Route::apiResource('/candidate', CandidateController::class);
-    Route::apiResource('/enrollment', EnrollmentController::class);
-    Route::apiResource('/exam', ExamController::class);
-    Route::apiResource('/progress', ProgressController::class);
-    Route::apiResource('/lesson', LessonController::class);
+    Route::apiResource('/candidate', CandidateController::class); //Allowed to make changes in your profile
+
+    Route::apiResource('/enrollment', EnrollmentController::class)->except(['store', 'update', 'destroy']); //Allowed just to see the courses
+    Route::apiResource('/exam', ExamController::class)->except(['store', 'update', 'destroy']); //Allowed just to see the exams
+    Route::apiResource('/progress', ProgressController::class)->except(['store', 'update', 'destroy']); //Allowed just to see the progress
+    Route::apiResource('/lesson', LessonController::class); //Allowed to enroll in lessons
 });
