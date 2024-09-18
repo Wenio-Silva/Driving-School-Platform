@@ -17,6 +17,7 @@ class EnrollmentResource extends JsonResource
         return [
             'id' => $this->id,
             'candiate_id' => $this->candidate_id,
+            'course_name' => $this->course ? $this->course->name : null,
             'course_id' => $this->course_id
         ];
     }

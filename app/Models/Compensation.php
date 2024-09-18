@@ -18,6 +18,6 @@ class Compensation extends Model
 
     public function trainer()
     {
-        return $this->belongTo(Trainer::class);
+        return $this->belongsTo(Trainer::class);
     }
 }

@@ -22,6 +22,6 @@ class Statistic extends Model
 
     public function candidate(): BelongsTo
     {
-        return $this->belongTo(Candidate::class);
+        return $this->belongsTo(Candidate::class);
     }
 }

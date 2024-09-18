@@ -19,6 +19,6 @@ class Payment extends Model
 
     public function candidate()
     {
-        return $this->belongTo(Candidate::class);
+        return $this->belongsTo(Candidate::class);
     }
 }
