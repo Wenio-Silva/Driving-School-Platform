@@ -22,6 +22,7 @@ class StoreStatisticRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'candidate_id' => 'required|integer',
             'total_courses' => 'required|integer',
             'courses_completed' => 'required|integer',
             'exams_passed' => 'required|integer',

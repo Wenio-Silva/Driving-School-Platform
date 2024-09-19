@@ -23,9 +23,4 @@ class VehicleUsage extends Model
     {
         return $this->belongsTo(Vehicle::class);
     }
-
-    public function vehiclesUsageStatistic()
-    {
-        return $this->hasMany(VehicleUsageStatistic::class);
-    }
 }

@@ -17,25 +17,21 @@ class CompensationController extends Controller
         return CompensationResource::collection(Compensation::all());
     }
 
-    public function store(StoreCompensationRequest $request, Trainer $trainer)
+    public function store(StoreCompensationRequest $request)
     {
-        $validatedData = $request->validated();
-
-        $date = Carbon::createFromFormat('Y-m-d', $request['date']);
-        $formattedDate = $date->format('d/m/Y');
-
+    
         $compensation = new Compensation();
-        $compensation->trainer_id = $trainer->id;
-        $compensation->amount = $validatedData['amount'];
-        $compensation->date = $date;
+        $compensation->trainer_id = $request['trainer_id'];
+        $compensation->amount = $request['amount'];
+        $compensation->date = $request['date'];
         $compensation->save();
 
         return CompensationResource::make($compensation);
     }
 
-    public function show(Trainer $trainer)
+    public function show(Compensation $compensation)
     {
-        return $trainer->compensations()->get(); //StatisticResource::make($trainer->statistics()->get());
+        return CompensationResource::make($compensation);
     }
 
     public function update(UpdateCompensationRequest $request, Compensation $compensation)

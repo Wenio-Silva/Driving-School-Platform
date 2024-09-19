@@ -16,8 +16,12 @@ class Compensation extends Model
         'date'
     ];
 
+    protected $casts = [
+        'date' => 'datetime',
+    ];
+
     public function trainer()
     {
-        return $this->belongTo(Trainer::class);
+        return $this->belongsTo(Trainer::class);
     }
 }

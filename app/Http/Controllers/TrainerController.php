@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Trainer;
+namespace App\Http\Controllers;
 
 use App\Models\Trainer;
 use App\Http\Controllers\Controller;
@@ -23,7 +23,14 @@ class TrainerController extends Controller
      */
     public function store(StoreTrainerRequest $request)
     {
-        $trainer = Trainer::create($request->validated());
+        $trainer = new Trainer();
+        $trainer->first_name = $request['first_name'];
+        $trainer->last_name = $request['last_name'];
+        $trainer->email = $request['email'];
+        $trainer->password = $request['password'];
+        $trainer->phone = $request['phone'];
+        $trainer->qualification = $request['qualification'];
+        $trainer->save();
 
         return TrainerResource::make($trainer);
     }

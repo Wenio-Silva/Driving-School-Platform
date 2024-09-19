@@ -10,8 +10,8 @@ class VehicleUsageStatistic extends Model
 {
     use HasFactory;
 
-    public function vehicleUsage()
+    public function vehicle()
     {
-        return $this->belongsTo(VehicleUsage::class);
+        return $this->belongsTo(Vehicle::class);
     }
 }

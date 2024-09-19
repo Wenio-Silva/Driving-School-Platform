@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use App\Models\VehicleUsageStatistic;
 use App\Http\Resources\VehicleResource;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
@@ -23,7 +24,14 @@ class VehicleController extends Controller
      */
     public function store(StoreVehicleRequest $request)
     {
-        $vehicle = Vehicle::create($request->validated());
+        $vehicle = new Vehicle();
+        $vehicle->make = $request['make'];
+        $vehicle->model = $request['model'];
+        $vehicle->year = $request['year'];
+        $vehicle->license_plate = $request['license_plate'];
+        $vehicle->status = $request['status'];
+        $vehicle->mileage = $request['mileage'];
+        $vehicle->save();
 
         return VehicleResource::make($vehicle);
     }

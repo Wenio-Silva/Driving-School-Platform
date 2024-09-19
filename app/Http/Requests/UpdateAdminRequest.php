@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCompensationRequest extends FormRequest
+class UpdateAdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class StoreCompensationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'trainer_id' => 'required|integer',
-            'amount' => 'required|numeric',
-            'date' => 'required|date_format:Y-m-d'
+            'name' => 'nullable|string',
+            'email' => 'nullable|string'
         ];
     }
 }

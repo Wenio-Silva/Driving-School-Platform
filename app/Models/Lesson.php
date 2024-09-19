@@ -22,23 +22,27 @@ class Lesson extends Model
         'status'
     ];
 
+    protected $casts = [
+        'date' => 'datetime',
+    ];
+
     public function candidate()
     {
-        return $this->belongTo(Candidate::class);
+        return $this->belongsTo(Candidate::class);
     }
 
     public function trainer()
     {
-        return $this->belongTo(Trainer::class);
+        return $this->belongsTo(Trainer::class);
     }
 
     public function vehicle()
     {
-        return $this->belongTo(Vehicle::class);
+        return $this->belongsTo(Vehicle::class);
     }
 
     public function course()
     {
-        return $this->belongTo(Course::class);
+        return $this->belongsTo(Course::class);
     }
 }

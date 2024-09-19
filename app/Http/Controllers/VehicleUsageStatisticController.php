@@ -34,4 +34,15 @@ class VehicleUsageStatisticController extends Controller
             'average_mileage_per_usage' => $averageMileagePerUsage
         ]);
     }
+
+    public function store(Vehicle $vehicle) 
+    {
+        $vehicleUsageStatistic = new VehicleUsageStatistic();
+        $vehicleUsageStatistic->vehicle_usage_id = $vehicle->id;
+        $vehicleUsageStatistic->total_lesson = 0;
+        $vehicleUsageStatistic->total_mileage = $vehicle->mileage;
+        $vehicleUsageStatistic->average_mileage_per_lesson = 0;
+        $vehicleUsageStatistic->save();
+
+    }
 }

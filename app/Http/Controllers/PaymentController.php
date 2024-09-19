@@ -15,11 +15,14 @@ class PaymentController extends Controller
         return PaymentResource::collection(Payment::all());
     }
 
-    public function store(StorePaymentRequest $request, Candidate $candidate)
+    public function store(StorePaymentRequest $request)
     {
-        $payment = Payment::create(array_merge([
-            'candidate_id' => $candidate->id
-        ], $request->validated()));
+        $payment = new Payment();
+        $payment->candidate_id = $request['candidate_id'];
+        $payment->amount = $request['amount'];
+        $payment->date = $request['date'];
+        $payment->payment_method = $request['payment_method'];
+        $payment->save();
 
         return PaymentResource::make($payment);
     }

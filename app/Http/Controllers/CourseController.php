@@ -23,7 +23,12 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        $course = Course::create($request->validated());
+        $course = new Course();
+        $course->name = $request['name'];
+        $course->description = $request['description'];
+        $course->duration = $request['duration'];
+        $course->price = $request['price'];
+        $course->save(); 
 
         return CourseResource::make($course);
     }
