@@ -18,18 +18,14 @@ class LessonController extends Controller
 
     public function store(StoreLessonRequest $request)
     {
-        $validatedData = $request->validated();
-
-        $date = Carbon::createFromFormat('Y-m-d H:i', $request['date']);
-        $formattedDate = $date->format('d/m/Y H:i');
 
         $lesson = new Lesson();
-        $lesson->trainer_id = $validatedData['trainer_id'];
-        $lesson->vehicle_id = $validatedData['vehicle_id'];
-        $lesson->candidate_id = $validatedData['candidate_id'];
-        $lesson->course_id = $validatedData['course_id'];
-        $lesson->date = $date;
-        $lesson->status = $validatedData['status'];
+        $lesson->trainer_id = $request['trainer_id'];
+        $lesson->vehicle_id = $request['vehicle_id'];
+        $lesson->candidate_id = $request['candidate_id'];
+        $lesson->course_id = $request['course_id'];
+        $lesson->date = $request['date'];
+        $lesson->status = $request['status'];
         $lesson->save();
 
         return LessonResource::make($lesson);

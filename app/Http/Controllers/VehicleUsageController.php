@@ -26,14 +26,13 @@ class VehicleUsageController extends Controller
 
     public function store(StoreVehicleUsageRequest $request)
     {
-        $validatedData = $request->validated();
 
         $vehicle_usage = new VehicleUsage();
-        $vehicle_usage->vehicle_id = $validatedData['vehicle_id'];
-        $vehicle_usage->lesson_id = $validatedData['lesson_id'];
-        $vehicle_usage->usage_date = $validatedData['usage_date'];
-        $vehicle_usage->mileage_before = $validatedData['mileage_before'];
-        $vehicle_usage->mileage_after = $validatedData['mileage_after'];
+        $vehicle_usage->vehicle_id = $request['vehicle_id'];
+        $vehicle_usage->lesson_id = $request['lesson_id'];
+        $vehicle_usage->usage_date = $request['usage_date'];
+        $vehicle_usage->mileage_before = $request['mileage_before'];
+        $vehicle_usage->mileage_after = $request['mileage_after'];
         $vehicle_usage->save();
 
         return VehicleUsageResource::make($vehicle_usage);
@@ -56,11 +55,5 @@ class VehicleUsageController extends Controller
         $vehicle_usage->delete();
         
         return response()->noContent();
-    }
-
-    //Vehicle Usage Statistics
-    public function showStatistics(Vehicle $vehicle)
-    {
-        return $this->vehicleStatisticsController->show($vehicle);
     }
 }

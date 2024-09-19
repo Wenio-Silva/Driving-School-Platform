@@ -17,13 +17,12 @@ class ExamController extends Controller
 
     public function store(StoreExamRequest $request)
     {
-        $validatedData = $request->validated();
 
         $exam = new Exam();
-        $exam->candidate_id = $validatedData['candidate_id'];
-        $exam->course_id = $validatedData['course_id'];
-        $exam->type = $validatedData['type'];
-        $exam->result = $validatedData['result'];
+        $exam->candidate_id = $request['candidate_id'];
+        $exam->course_id = $request['course_id'];
+        $exam->type = $request['type'];
+        $exam->result = $request['result'];
         $exam->save();
 
         return ExamResource::make($exam);

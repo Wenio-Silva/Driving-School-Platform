@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vehicle_usage_statistics', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vehicle_usage_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('vehicle_id')->constrained()->cascadeOnDelete();
             $table->integer('total_lesson');
             $table->integer('total_mileage');
             $table->decimal('average_mileage_per_lesson');

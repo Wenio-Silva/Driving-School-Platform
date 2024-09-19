@@ -22,6 +22,7 @@ class StorePaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'candidate_id' => 'required|integer',
             'amount' => 'required|numeric',
             'date' => 'required|date',
             'payment_method' => 'required|string'

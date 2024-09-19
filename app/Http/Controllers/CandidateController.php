@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Candidate;
+namespace App\Http\Controllers;
 
 use App\Models\Candidate;
 use App\Http\Controllers\Controller;
@@ -34,10 +34,15 @@ class CandidateController extends Controller
      */
     public function store(StoreCandidateRequest $request)
     {
-        $data = $request->validated();
-        $data['registration_date'] = now()->format('Y-m-d'); //It's not working
-
-        $candidate = Candidate::create($data);
+        $candidate = new Candidate();
+        $candidate->first_name = $request['first_name'];
+        $candidate->last_name = $request['last_name'];
+        $candidate->email = $request['email'];
+        $candidate->password = $request['password'];
+        $candidate->phone = $request['phone'];
+        $candidate->address = $request['address'];
+        $candidate->registration_date = $request['registration_date'];
+        $candiadte->save();
 
         return CandidateResource::make($candidate);
     }

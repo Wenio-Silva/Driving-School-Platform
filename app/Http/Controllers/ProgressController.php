@@ -17,13 +17,12 @@ class ProgressController extends Controller
 
     public function store(StoreProgressRequest $request)
     {
-        $validatedData = $request->validated();
 
         $progress = new Progress();
-        $progress->candidate_id = $validatedData['candidate_id'];
-        $progress->course_id = $validatedData['course_id'];
-        $progress->status = $validatedData['status'];
-        $progress->completition_porcentage = $validatedData['completition_porcentage'];
+        $progress->candidate_id = $request['candidate_id'];
+        $progress->course_id = $request['course_id'];
+        $progress->status = $request['status'];
+        $progress->completition_porcentage = $request['completition_porcentage'];
         $progress->save();
 
         return ProgressResource::make($progress);

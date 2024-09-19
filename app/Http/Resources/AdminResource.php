@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CompensationResource extends JsonResource
+class AdminResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,8 @@ class CompensationResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'trainer_id' => $this->trainer_id,
-            'amount' => $this->amount,
-            'date' => $this->date ? $this->date->format('d-m-Y') : null
+            'name' => $this->name,
+            'email' => $this->email
         ];
     }
 }

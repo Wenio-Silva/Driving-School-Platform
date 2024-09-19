@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\PaymentController;
@@ -12,9 +13,9 @@ use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\CompensationController;
 use App\Http\Controllers\VehicleUsageController;
-use App\Http\Controllers\Trainer\TrainerController;
+use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\API\Auth\AdminAuthController;
-use App\Http\Controllers\Candidate\CandidateController;
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\API\Auth\TrainerAuthController;
 use App\Http\Controllers\API\Auth\CandidateAuthController;
 
@@ -32,6 +33,8 @@ use App\Http\Controllers\API\Auth\CandidateAuthController;
 Route::post('admin/login', [AdminAuthController::class, 'login']);
 Route::post('candidate/login', [CandidateAuthController::class, 'login']);
 Route::post('trainer/login', [TrainerAuthController::class, 'login']);
+
+Route::post('admin/register', [AdminController::class, 'store']);
 
 //Route::post('admin/register', [AdminAuthController::class, 'register']);
 //Route::post('candidate/register', [CandidateAuthController::class, 'register']);
@@ -59,8 +62,8 @@ Route::middleware(['auth:sanctum', 'type.admin'])->group(function () {
 
 
     Route::get('/admin/compensation', [CompensationController::class, 'index']);
-    Route::get('/admin/compensation/{trainer}', [CompensationController::class, 'show']);
-    Route::post('/admin/compensation/{trainer}', [CompensationController::class, 'store']);
+    Route::get('/admin/compensation/{compensation}', [CompensationController::class, 'show']);
+    Route::post('/admin/compensation', [CompensationController::class, 'store']);
     Route::patch('/admin/compensation/{compensation}', [CompensationController::class, 'update']);
     Route::delete('/admin/compensation/{compensation}', [CompensationController::class, 'destroy']);
 

@@ -19,11 +19,16 @@ class StatisticController extends Controller
         return StatisticResource::collection(Statistic::all());
     }
 
-    public function store(StoreStatisticRequest $request, Candidate $candidate)
+    public function store(StoreStatisticRequest $request)
     {
-        $statistic = Statistic::create(array_merge([
-            'candidate_id' => $candidate->id
-        ], $request->validated()));
+        $statistic = new Statistic();
+        $statistic->candiate_id = $required['candiate_id'];
+        $statistic->total_courses = $required['total_courses'];
+        $statistic->courses_completed = $required['courses_completed'];
+        $statistic->exams_passed = $required['exams_passed'];
+        $statistic->exams_failed = $required['exams_failed'];
+        $statistic->average_progress = $required['average_progress'];
+        $statistic->save();
 
         return StatisticResource::make($statistic);
     }

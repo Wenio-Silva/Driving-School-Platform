@@ -22,6 +22,10 @@ class Lesson extends Model
         'status'
     ];
 
+    protected $casts = [
+        'date' => 'datetime',
+    ];
+
     public function candidate()
     {
         return $this->belongsTo(Candidate::class);
